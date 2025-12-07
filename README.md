@@ -15,3 +15,13 @@ I retrieved the user's credentials to create a stage in Snowflake. I chose the s
 
 I created my first S3 bucket. Then, I uploaded the .CSV files to later use in Snowflake.
 
+<img src="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/Screenshots/Files%20upload.png?raw=true"></img>
+
+<h2>Step 3. Load the data onto Snowflake </h2>
+
+I created a new table called "raw_movies" and assigned the data type of each column (movieID, title, genre). 
+
+<h2>Citation (for using the .CSV files):</h2>
+
+<img src="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/Screenshots/Citation.png?raw=true"></img>
+
