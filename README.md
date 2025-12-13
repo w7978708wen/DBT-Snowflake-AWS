@@ -50,11 +50,17 @@ I learned 2 major things:
 
 <a href="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/SQL%20files/create%20stage%20and%20load%20data.sql">Here </a> is the code (I combined steps 2 and 3 into the same file) .
 
-<h2>Step 4.</h2>
+<h2>Step 4. DBT Project Set-Up and Connection to Snowflake</h2>
 In VS Code, I created and activated the virtual environment, which stores the project's packages independently.
 
 
 Next, I installed dbt-Snowflake within the virtual environment.
+
+Then, I initialized the dbt project by giving credentials like my Snowflake Account Identifier value. I learned some trouble-shooting, like when I was not able to complete my profile.yml during the set-up because the terminal froze. So, I learned how to resume the set-up, doing steps like creating a profile.yml file from scratch in the correct folder and testing the authentication connection. 🎉
+
+<img src="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/Screenshots/dbt-snowflake%20connection.png?raw=true"></img>
+
+<br>
 
 <h2>Citation (for using the .CSV files):</h2>
 
