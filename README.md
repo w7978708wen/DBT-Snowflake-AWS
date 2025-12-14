@@ -65,7 +65,7 @@ I also installed extensions on VS Code like "Power User for dbt" and "dbt format
 
 
 <h2>Step 5. Model creation </h2>
-Each dbt model is a SQL select statement which would transform my data. For each .csv file, I created a temporary table (view) in VS Code, so I can directly reference to the view later. 
+Each dbt model is a SQL select statement which would transform my data. For each .csv file, I created a temporary table (view) in my data warehouse using VS Code, so I can directly reference to the view later. 
 <a href="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/project/models/staging/src_models.sql"> Here </a> is the SQL file. 
 
 <br>
