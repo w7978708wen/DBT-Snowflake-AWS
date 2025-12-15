@@ -94,5 +94,20 @@ FROM '@netflix_stage/links.csv'
 FILE_FORMAT = (TYPE = 'CSV' SKIP_HEADER = 1 FIELD_OPTIONALLY_ENCLOSED_BY = '"')
 ON_ERROR = 'CONTINUE';
 
+
+
+-- 6. Load data from genome_scores.csv
+CREATE OR REPLACE TABLE raw_genome_scores (
+  movieId INTEGER,
+  tagId INTEGER,
+  relevance FLOAT
+);
+
+COPY INTO raw_genome_scores
+FROM '@netflix_stage/genome-scores.csv'
+FILE_FORMAT = (TYPE = 'CSV' SKIP_HEADER = 1 FIELD_OPTIONALLY_ENCLOSED_BY = '"');
+
+
+
 -- View the entire table
 SELECT * FROM raw_links
