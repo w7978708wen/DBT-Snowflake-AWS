@@ -65,12 +65,17 @@ I also installed extensions on VS Code like "Power User for dbt" and "dbt format
 
 
 <h2>Step 5. Model creation </h2>
-Each dbt model is a SQL select statement which would transform my data. For each .csv file, I created a temporary table (view) in my data warehouse using VS Code, so I can directly reference to the view later. 
+Here, I want the data to go from the raw to staging.
+
+Each DBT model is a SQL select statement which would transform my data. For each .csv file, I created a temporary table (view) in my data warehouse using VS Code, so I can directly reference to the view later. I also have the option to change the DBT materialization configuration, where I could change from getting view to table, etc. 
+
+<br>
+
 <a href="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/project/models/staging/src_models.sql"> Here </a> is the SQL file. 
 
 <br>
 
-This change is reflected in Snowflake so when I refresh the left side bar, the view appears. I like to preview the view to make sure the data transferred over.
+This change is reflected in Snowflake so when I refresh the Database Explorer, the view appears. I like to preview the view to make sure the data transferred over.
 
 <br>
 
@@ -79,6 +84,10 @@ This change is reflected in Snowflake so when I refresh the left side bar, the v
 <br>
 
 <img src="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/Screenshots/view%20created%202.png"></img>
+
+<br>
+
+Using the same method, I created a DBT model for each of the tables containing raw data ... to take this data to the staging step.
 
 <br>
 
