@@ -99,19 +99,20 @@ Also: Ideally, we should have a different schema for the raw version and for the
 
 <br>
 
-In addition, I updated the DBT model configuration so that models are materialized as views by default at the project level, while models inside the dim folder are materialized as tables.
+In addition, I updated the DBT model configuration so that models are materialized as views by default at the project level, while models inside the fact (fct) and dim folders are materialized as tables.
 
-As a result, in Step 5, all DBT models were created as views. In Step 6, the dimension models were materialized as tables, while other models continued to be created as views.
+As a result, in Step 5, all DBT models were created as views. In Step 6, the fact and dimension models were materialized as tables, while other models continued to be created as views.
 
 <img src="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/Screenshots/dbt%20model%20configuration.png?raw=true"></img>
 
 <br>
 
-Preview the dimension table:
+I wrote CTE using SQL to help with creating the fact and dimension tables. 
+
+Here is a preview of the first dimension table I created:
 <img src="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/Screenshots/preview%20dimension%20table.png?raw=true"></img>
 
-Using a similar method, create a dimension table for each of the DBT model outputs. I prefer to run “dbt run” on the terminal after creating each view/table and seeing the view/table via Snowflake's Database Explorer to see if any errors need to be fixed.
-
+Using a similar method, create fact and dimension tables for each of the DBT model outputs. After creating each view/table, I prefer to run the DBT on the terminal and seeing it via Snowflake's Database Explorer to see if any errors need to be fixed.
 
 <br>
 
