@@ -43,7 +43,7 @@ I learned 2 major things:
 
 1.If your created table's column  name and data type don't entirely match those in the <code>.csv</code>file, then every observation will not be loaded (result in error). 
 
-2.One minor issue occurred when loading `ratings.csv`: 3 out of 465,564 rows failed to load, likely due to formatting errors, in the source file. Since the dataset is external and the number of problematic rows is extremely small, it is acceptable to proceed.
+2.One minor issue occurred when loading <code>ratings.csv</code>: 3 out of 465,564 rows failed to load, likely due to formatting errors, in the source file. Since the dataset is external and the number of problematic rows is extremely small, it is acceptable to proceed.
 
 <img src="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/create%20stage%20and%20load%20data.sql"></img>
 <br>
@@ -67,7 +67,7 @@ I also installed extensions on VS Code like "Power User for dbt" and "dbt format
 <h2>Step 5. Model creation </h2>
 Here, I want the data to go from the raw to staging.
 
-Each DBT model is a SQL select statement which would transform my data. For each .csv file, I created a temporary table (view) in my data warehouse using VS Code, so I can directly reference to the view later. I also have the option to change the DBT materialization configuration, where I could change from getting view to table, etc. 
+Each DBT model is a SQL select statement which would transform my data. For each <code>.csv</code> file, I created a temporary table (view) in my data warehouse using VS Code, so I can directly reference to the view later. I also have the option to change the DBT materialization configuration, where I could change from getting view to table, etc. 
 
 <br>
 
@@ -120,11 +120,11 @@ Using a similar method, I create the remaining dimension tables by using the DBT
 
 <h3>Fact tables</h3>
 
-I created the first fact table "fct_genome_score.sql" as a table, which is the default materialization I set in dbt_profile.yml . 
+I created the first fact table <code>fct_genome_score.sql</code> as a table, which is the default materialization I set in <code>dbt_profile.yml</code> . 
 
 <br>
 
-Then, I created the second fact table "fct_ratings.sql" as an incremental model, which automatically appends only new records whose timestamps are more recent than the latest timestamp already loaded in the table.The configuration I specified in fct_ratings.sql overwrites the default configuration written in dbt_profile.yml. 
+Then, I created the second fact table <code>fct_ratings.sql</code> as an incremental model to efficiently handle newly arriving fact data over time. This incremental model is designed to automatically appends only new records whose timestamps are more recent than the latest timestamp already loaded in the table. The configuration I specified in <code>fct_ratings.sql</code> overwrites the default configuration written in <code>dbt_profile.yml</code>. 
 
 
 <br>
