@@ -101,7 +101,7 @@ Also: Ideally, we should have a different schema for the raw version and for the
 
 In addition, I updated the DBT model configuration so that models are materialized as views by default at the project level, while models inside the fact (fct) and dim folders are materialized as tables.
 
-As a result, in Step 5, all DBT models were created as views. In Step 6, the fact and dimension models were materialized as tables, while other models continued to be created as views.
+As a result, in Step 5, all DBT models were created as views. In Step 6, the fact and dimension models changed to be materialized as tables by default, while other models continued to be created as views.
 
 <img src="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/Screenshots/dbt%20model%20configuration.png?raw=true"></img>
 
@@ -109,12 +109,27 @@ As a result, in Step 5, all DBT models were created as views. In Step 6, the fac
 
 I wrote CTE using SQL to help with creating the fact and dimension tables. 
 
+<h3>Dimension tables</h3>
+
 Here is a preview of the first dimension table I created:
 <img src="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/Screenshots/preview%20dimension%20table.png?raw=true"></img>
 
-Using a similar method, create fact and dimension tables for each of the DBT model outputs. After creating each view/table, I prefer to run the DBT on the terminal and seeing it via Snowflake's Database Explorer to see if any errors need to be fixed.
+Using a similar method, I create the remaining dimension tables by using the DBT model outputs. 
 
 <br>
+
+<h3>Fact tables</h3>
+
+I created the first fact table "fct_genome_score.sql" as a table, which is the default materialization I set in dbt_profile.yml . 
+
+<br>
+
+Then, I created the second fact table "fct_ratings.sql" as an incremental model, which automatically appends only new records whose timestamps are more recent than the latest timestamp already loaded in the table.The configuration I specified in fct_ratings.sql overwrites the default configuration written in dbt_profile.yml. 
+
+
+<br>
+
+After creating each view/table, I prefer to run the DBT on the terminal and seeing it via Snowflake's Database Explorer to see if any errors need to be fixed.
 
 <h2>Citation (for using the .CSV files):</h2>
 
