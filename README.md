@@ -43,7 +43,7 @@ I learned 2 major things:
 
 1.If your created table's column  name and data type don't entirely match those in the <code>.csv</code>file, then every observation will not be loaded (result in error). 
 
-2.One minor issue occurred when loading `ratings.csv`: 3 out of 465,564 rows failed to load, likely due to formatting errors, in the source file. Since the dataset is external and the number of problematic rows is extremely small, it is acceptable to proceed.
+2.One minor issue occurred when loading <code>ratings.csv</code>: 3 out of 465,564 rows failed to load, likely due to formatting errors, in the source file. Since the dataset is external and the number of problematic rows is extremely small, it is acceptable to proceed.
 
 <img src="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/create%20stage%20and%20load%20data.sql"></img>
 <br>
@@ -67,7 +67,7 @@ I also installed extensions on VS Code like "Power User for dbt" and "dbt format
 <h2>Step 5. Model creation </h2>
 Here, I want the data to go from the raw to staging.
 
-Each DBT model is a SQL select statement which would transform my data. For each .csv file, I created a temporary table (view) in my data warehouse using VS Code, so I can directly reference to the view later. I also have the option to change the DBT materialization configuration, where I could change from getting view to table, etc. 
+Each DBT model is a SQL select statement which would transform my data. For each <code>.csv</code> file, I created a temporary table (view) in my data warehouse using VS Code, so I can directly reference to the view later. I also have the option to change the DBT materialization configuration, where I could change from getting view to table, etc. 
 
 <br>
 
@@ -101,7 +101,7 @@ Also: Ideally, we should have a different schema for the raw version and for the
 
 In addition, I updated the DBT model configuration so that models are materialized as views by default at the project level, while models inside the fact (fct) and dim folders are materialized as tables.
 
-As a result, in Step 5, all DBT models were created as views. In Step 6, the fact and dimension models were materialized as tables, while other models continued to be created as views.
+As a result, in Step 5, all DBT models were created as views. In Step 6, the fact and dimension models changed to be materialized as tables by default, while other models continued to be created as views.
 
 <img src="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/Screenshots/dbt%20model%20configuration.png?raw=true"></img>
 
@@ -109,12 +109,27 @@ As a result, in Step 5, all DBT models were created as views. In Step 6, the fac
 
 I wrote CTE using SQL to help with creating the fact and dimension tables. 
 
+<h3>Dimension tables</h3>
+
 Here is a preview of the first dimension table I created:
 <img src="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/Screenshots/preview%20dimension%20table.png?raw=true"></img>
 
-Using a similar method, create fact and dimension tables for each of the DBT model outputs. After creating each view/table, I prefer to run the DBT on the terminal and seeing it via Snowflake's Database Explorer to see if any errors need to be fixed.
+Using a similar method, I create the remaining dimension tables by using the DBT model outputs. 
 
 <br>
+
+<h3>Fact tables</h3>
+
+I created the first fact table <code>fct_genome_score.sql</code> as a table, which is the default materialization I set in <code>dbt_profile.yml</code> . 
+
+<br>
+
+Then, I created the second fact table <code>fct_ratings.sql</code> as an incremental model to efficiently handle newly arriving fact data over time. This incremental model is designed to automatically appends only new records whose timestamps are more recent than the latest timestamp already loaded in the table. The configuration I specified in <code>fct_ratings.sql</code> overwrites the default configuration written in <code>dbt_profile.yml</code>. 
+
+
+<br>
+
+After creating each view/table, I prefer to run the DBT on the terminal and seeing it via Snowflake's Database Explorer to see if any errors need to be fixed.
 
 <h2>Citation (for using the .CSV files):</h2>
 
