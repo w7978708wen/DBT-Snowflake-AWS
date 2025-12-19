@@ -3,8 +3,7 @@
 
 In short, I created a "transform" role, a DBT user, granted permissions to the "transform" role, and assigned the DBT user to have this role. I also created the default warehouse here. 
 
-<a href="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/Role%20and%20user%20creation.sql">Here</a> is the code . 
-<br>
+Code available upon request.
 
 <h2>Step 2. Created the stage to connect to AWS </h2>
 
@@ -127,9 +126,29 @@ I created the first fact table <code>fct_genome_score.sql</code> as a table, whi
 Then, I created the second fact table <code>fct_ratings.sql</code> as an incremental model to efficiently handle newly arriving fact data over time. This incremental model is designed to automatically appends only new records whose timestamps are more recent than the latest timestamp already loaded in the table. The configuration I specified in <code>fct_ratings.sql</code> overwrites the default configuration written in <code>dbt_profile.yml</code>. 
 
 
+Then I retrieved the <code>src_ratings.sql</code>, which was first created as a view in the staging folder. I want to simulate the situation where the table is conditioned to change when a new row of data comes in. So in <code>src_ratings.sql</code>, I specified configuration in the file which would overwrite the default configuration I set in <code>dbt_profile.yml</code>. Even though it will still be inside the "Staging" folder, it will become a table instead of staying as a view. 
+
+In Snowflake, here is a snippet of the table output before adding a new line of record. 
+<img src="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/Screenshots/src_ratings%20output%201.png?raw=true" width=900></img>
+
+
+After adding a new line of record and re-opening the table, here is a snippet of the output:
+
+<img src="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/Screenshots/src_ratings%20output%202.png?raw=true" width=900></img>
+
+Since the new row has a newer ratings timestamp than the existing record (for movie_id = 7151), the new row is appended to the table. 
+
 <br>
 
-After creating each view/table, I prefer to run the DBT on the terminal and seeing it via Snowflake's Database Explorer to see if any errors need to be fixed.
+In order for the new row in src_ratings dimension table to reflect in fct_ratings fact table, I typed some new commands on VS Code’s terminal, which detects whether there is any new data or not for the incremental model. Later, in Snowflake, the fct_ratings table also has this new row. 
+The src_ratings and fct_ratings table have the same-looking output. 
+
+<br>
+I also created an ephemeral model, where I can re-use the SQL logic, without creating a physical table/view in Snowflake. This type of model is beneficial for reducing storage costs and I/O costs leading to better query performance ... because it doesn't need to fetch data by reading intermediate tables/views.
+
+<br>
+
+In general, after creating each view/table, I prefer to run the DBT on the terminal and seeing it via Snowflake's Database Explorer to see if any errors need to be fixed.
 
 <h2>Citation (for using the .CSV files):</h2>
 
