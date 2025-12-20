@@ -144,7 +144,28 @@ In order for the new row in src_ratings dimension table to reflect in fct_rating
 The src_ratings and fct_ratings table have the same-looking output. 
 
 <br>
-I also created an ephemeral model, where I can re-use the SQL logic, without creating a physical table/view in Snowflake. This type of model is beneficial for reducing storage costs and I/O costs leading to better query performance ... because it doesn't need to fetch data by reading intermediate tables/views.
+I also created an ephemeral model called <code>dim_movies_with_tags.sql</code>, where I can re-use the SQL logic, without creating a physical table/view in Snowflake. This type of model is beneficial for reducing storage costs and I/O costs leading to better query performance ... because it doesn't need to fetch data by reading intermediate tables/views.
+
+<br>
+
+I experimented calling the ephemeral model <code>dim_movies_with_tags.sql</code> by creating a fact table called <code>ep_movie_with_tags.sql</code> with this code inside:
+
+```sql
+WITH fct_movie_w_tags AS (
+    SELECT * FROM {{ ref('dim_movies_with_tags')}}
+)
+
+SELECT * FROM fct_movie_w_tags
+```
+
+<code>ep_movie_with_tags.sql</code> is only created for educational purposes to help myself understand the application of ephemeral models.
+<br>
+
+In Snowflake's Database Explorer, I can preview the <code>dim_movies_with_tags.sql</code> 's data through <code>ep_movie_with_tags.sql</code> .
+
+<br>
+
+<img src="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/Screenshots/ephemeral%20model%20logic%20used.png?raw=true"></img>
 
 <br>
 
