@@ -1,0 +1,26 @@
+# Define a set of rules inside sources.yml about what we want to do,
+# good for conceptual understanding
+# optional to add aspects like description (eg. is this column the primary key) and tests
+
+version: 2
+
+sources:
+  - name: project
+    schema: raw
+    tables:
+      - name: r_movies
+        # description: Raw movie data from ...
+        # tests:
+        #- unique
+        #- not_null
+        identifier: raw_movies
+      - name: r_ratings
+        identifier: raw_ratings
+      - name: r_tags
+        identifier: raw_tags
+      - name: r_genome_tags
+        identifier: raw_genome_tags
+      - name: r_genome_scores
+        identifier: raw_genome_scores
+      - name: r_links
+        identifier: raw_links
