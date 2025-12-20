@@ -148,7 +148,7 @@ I also created an ephemeral model called <code>dim_movies_with_tags.sql</code>, 
 
 <br>
 
-I experimented calling the ephemeral model <code>dim_movies_with_tags.sql</code> by creating a fact table called <code>ep_movie_with_tags.sql</code> with this code inside:
+I experimented calling the ephemeral model <code>dim_movies_with_tags.sql</code> by creating a SQL file called <code>ep_movie_with_tags.sql</code> with this code inside:
 
 ```sql
 WITH fct_movie_w_tags AS (
