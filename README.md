@@ -173,7 +173,7 @@ In general, after creating each view/table, I prefer to run the dbt on the termi
 
 The files containing the code are located across the <code>models</code> folder. Click <a href="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/tree/main/project/models">here</a> to view. 
 
-<h2>Step 7. Turning .CSV content into tables without uploading .CSV files </h2>
+<h2>Step 7. Turning CSV content into tables without uploading CSV files </h2>
 I created a dbt seed by manually defining a small CSV dataset, which dbt materialized as a table in Snowflake. For small datasets, this is more convenient than uploading the CSV files from AWS S3 bucket and integrating them into Snowflake. 
 
 <br>
@@ -183,7 +183,36 @@ Although a seed does not need to be wrapped in a model to work because a seed is
 
 Code viewable <a href="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/tree/main/project/seeds">here</a>. 
 
-<h2>Citation (for using the .CSV files):</h2>
+<h2>Step 8. Create snapshot and surrogate key in table </h2>
+I create a snapshot of table <code>src_ratings.sql</code> model to track historical changes to individual records over time when source data is updated.
+
+I also learned how to create a surrogate key for the snapshot table used one of dbt's packages. The surrogate key is made because none of the values in each column is unique on their own. The surrogate key ,called "row_key", is derived from the combination of the "user_id", "movie_id", and "tag" columns from the <code>src_ratings.sql</code> table 
+
+<br>
+
+On Snowflake, here is my snapshot table with the surrogate key column highlighted in blue:
+<img src="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/Screenshots/snapshot%20table.png?raw=true"></img>
+
+Then I learned how to reference to the snapshot by writing a query in Snowflake, which reads snapshot history and orders rows by user_id to see how each record changes over time.
+
+```sql
+SELECT * FROM snapshots.snap_tags
+ORDER BY user_id, dbt_valid_from DESC;
+```
+Here is a snippet of the query output 
+<img src="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/Screenshots/output%20of%20query%20which%20references%20snapshots.snap_tags.png?raw=true"></img>
+
+I changed the tag's value for rows with user_id = 18. In the meantime, I changed the configuration of <code>src_ratings.sql</code> from view to table, so the table could be referenced in the query. 
+
+Then I took another dbt snapshot, and viewed the output of the snapshot table. There are now 2 rows - 1 row has the old tag value and the other row has the new tag value.
+
+Here is a snippet of the output snapshot table:
+<img src="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/Screenshots/snapshot%202%20table.png?raw=true"></img>
+
+View my code on Snowflake <a href="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/take%20snapshots.sql">here</a>.
+
+<h2>Citation (for using the CSV files):</h2>
+
 
 <img src="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/Screenshots/Citation.png?raw=true"></img>
 
