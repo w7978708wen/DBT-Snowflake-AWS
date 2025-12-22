@@ -1,3 +1,6 @@
+--change this particular view's configuration from view to table in VS Code
+{{ config(materialized = 'table') }}
+
 -- "RAW_TAGS" is the table created from scratch inside folder "RAW"
 -- "MOVIELENS" is the database name
 -- "RAW" is the folder inside database "MOVIELENS"
