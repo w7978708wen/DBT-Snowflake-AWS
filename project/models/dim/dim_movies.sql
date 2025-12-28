@@ -1,8 +1,8 @@
 -- "src_movies" CTE takes the output of the DBT model "src_movies" from "src_movies.sql"
 -- Then selects everything
 -- And store the results as a temporary CTE called "src_movies"
-WITH src_movies AS (
-    SELECT * FROM {{ ref('src_movies') }}
+WITH stage_movies AS (
+    SELECT * FROM {{ ref('stage_movies') }}
 )
  
 
@@ -16,4 +16,4 @@ SELECT
     --split genre by |
     SPLIT(genre, '|') AS genre_array,
     genre
-FROM src_movies
+FROM stage_movies

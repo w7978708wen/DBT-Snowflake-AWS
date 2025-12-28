@@ -2,8 +2,8 @@
 -- Then selects everything
 -- And store the results as a temporary CTE called "ratings"
 
-WITH src_tags AS (
-    SELECT * FROM {{ ref('src_genome_tags') }}
+WITH stage_tags AS (
+    SELECT * FROM {{ ref('stage_g_tags') }}
 )
 
 
@@ -14,4 +14,4 @@ WITH src_tags AS (
 SELECT
     tag_id,
     INITCAP(TRIM(tag)) AS tag_name
-FROM src_tags
+FROM stage_tags

@@ -1,8 +1,8 @@
 -- "src_scores" CTE takes the output of the DBT model "src_genome_score" from "src_genome_score.sql"
 -- Then selects everything
 -- And store the results as a temporary CTE called "src_scores"
-WITH src_scores AS (
-    SELECT * FROM {{ ref('src_genome_score') }}
+WITH stage_scores AS (
+    SELECT * FROM {{ ref('stage_g_score') }}
 )
 
 -- select columns from CTE "src_scores"
@@ -12,5 +12,5 @@ SELECT
     movie_id,
     tag_id,
     ROUND(relevance, 4) AS relevance_score
-FROM src_scores
+FROM stage_scores
 WHERE relevance > 0

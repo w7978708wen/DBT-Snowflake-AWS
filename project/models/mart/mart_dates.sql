@@ -10,7 +10,7 @@ WITH fct_ratings AS (
 -- Create CTE "seed_dates" which references to the output of DBT model "fct_ratings"
 -- Selects everything inside and stores the results as the CTE 
 seed_dates AS (
-    SELECT * FROM {{ ref('seed_movie_release_dates') }}
+    SELECT * FROM {{ ref('seed_dates') }}
 )
 
 -- Do CASE expression and left join using the 2 CTEs

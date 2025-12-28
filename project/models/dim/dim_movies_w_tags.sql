@@ -16,10 +16,10 @@ WITH movies AS (
     SELECT * FROM {{ ref("dim_movies") }}
 ),
 tags AS (
-    SELECT * FROM {{ ref("dim_genome_tags") }}
+    SELECT * FROM {{ ref("dim_g_tags") }}
 ),
 scores AS (
-    SELECT * FROM {{ ref("fct_genome_score") }}
+    SELECT * FROM {{ ref("fct_g_score") }}
 )
 
 -- Do left joins using the 3 CTEs

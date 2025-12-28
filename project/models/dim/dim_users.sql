@@ -3,14 +3,14 @@
 --And store the results as a temporary CTE called "ratings"
 
 WITH ratings AS (
-  SELECT DISTINCT user_ID FROM {{ ref('src_ratings') }}
+  SELECT DISTINCT user_ID FROM {{ ref('stage_ratings') }}
 ),
 
 --"tags" CTE takes the output of the DBT model "src_tags" from "src_tags.sql"
 --Then get the distinct user_ID's 
 --And store the results as a temporary CTE called "tags"
 tags AS (
-  SELECT DISTINCT user_ID FROM {{ ref('src_tags') }}
+  SELECT DISTINCT user_ID FROM {{ ref('stage_tags') }}
 )
 
 -- The final SELECT statement combines both "ratings" and "tags" CTEs 

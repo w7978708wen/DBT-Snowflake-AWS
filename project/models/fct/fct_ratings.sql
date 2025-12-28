@@ -14,7 +14,7 @@
 -- Then selects everything
 -- And store the results as a temporary CTE called "src_ratings"
 WITH src_ratings AS (
-  SELECT * FROM {{ ref('src_ratings') }}
+  SELECT * FROM {{ ref('stage_ratings') }}
 )
 
 
