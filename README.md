@@ -218,6 +218,8 @@ Before the data is moved forward, it is important to ensure that all test cases 
 
 I can also choose to set a warning instead of an error if failure thresholds are met.
 
+I also defined a macro to reuse test logic across all models in the project. For example, I used this macro to enforce that values must be non-null across all models.
+
 <br>
 
 <h2>Step 10. dbt documentation</h2>
@@ -231,6 +233,17 @@ Here is a preview:
 
 <img src="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/Screenshots/dbt%20documentation.png?raw=true" height="400"></img>
 
+<br>
+
+<h2>Step 11. Analysis</h2>
+
+I used Snowflake and dbt compiler to generate the output table for analysis. 
+
+<br>
+Here is a snippet of the output:
+<img src="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/Screenshots/analysis_output.png?raw=true"></img>
+
+<br>
 
 <h2>Citation (for using the CSV files):</h2>
 
