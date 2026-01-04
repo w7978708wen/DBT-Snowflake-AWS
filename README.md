@@ -245,9 +245,6 @@ Here is a preview:
 <br>
 
 <h2>Step 11. Analysis</h2>
-
-I used Snowflake and dbt compiler to do data analysis that I believe will provide business value to my target client, a broadcasting company that wants to purchase some movies to air on their television channels. It would be good to identify some well-performing movies to maximize their ROI in the form of number of clients wanting to put commercials during the movie's break times.
-
 This analysis on the historical movie ratings data is designed for a broadcasting company that wants to purchase movie licensing rights to air films on its television channel(s).
 
 From a business perspective, the broadcaster’s goal is to:
