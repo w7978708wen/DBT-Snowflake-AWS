@@ -4,7 +4,7 @@ This project demonstrates an end-to-end data analytics pipeline built using AWS 
 
 <br>
 
-I then used the final transformed data for business analysis. The target client for this analysis is a broadcasting company seeking to make informed decisions on which movies to purchase. For readers most interested in my business analysis capabilities, please refer to Step 11: Analysis.
+I then used the final transformed data for business analysis. The target client for this analysis is a broadcasting company seeking to make informed decisions on which movies to purchase. For readers most interested in my business analysis capabilities, please refer to Step 11. Analysis.
 
 <br>
 
