@@ -309,11 +309,3 @@ Here is a snippet of the output:
 
 Note:
 The genre field in this analysis is derived from appended genre tags in the source dataset. Movies with multiple genres (e.g., Comedy|Drama) are treated as separate genre classifications from single-genre movies (e.g., Comedy).
-
-<br>
-
-<h2>Citation (for using the CSV files):</h2>
-
-
-<img src="https://github.com/w7978708wen/DataBuildTool-Snowflake-AmazonWebServices/blob/main/Screenshots/Citation.png?raw=true"></img>
-
