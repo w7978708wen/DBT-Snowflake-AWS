@@ -1,3 +1,12 @@
+<h2>Overview</h2>
+
+This project demonstrates an end-to-end data analytics pipeline built using AWS S3, Snowflake, and dbt. I stored the historical movie-related datasets in CSV format in Amazon S3, ingested them into Snowflake, and transformed them using dbt following analytics engineering best practices (including staging, fact and dimension modeling, testing, snapshots, and documentation). 
+
+<br>
+
+I then used the final transformed data for business analysis. The target client for this analysis is a broadcasting company seeking to make informed decisions on which movies to purchase. For readers most interested in my business analysis capabilities, please refer to Step 11: Analysis.
+
+<br>
 
 <h2>Step 1. Role and user creation</h2>
 
